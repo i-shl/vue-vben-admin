@@ -1,4 +1,4 @@
-import type { Recordable, UserInfo } from '@vben/types';
+﻿import type { Recordable, UserInfo } from '@vben/types';
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -10,7 +10,6 @@ import { resetAllStores, useAccessStore, useUserStore } from '@vben/stores';
 import { notification } from 'ant-design-vue';
 import { defineStore } from 'pinia';
 
-import { getAccessCodesApi, getUserInfoApi, loginApi, logoutApi } from '#/api';
 import { $t } from '#/locales';
 
 export const useAuthStore = defineStore('auth', () => {
@@ -29,44 +28,48 @@ export const useAuthStore = defineStore('auth', () => {
     params: Recordable<any>,
     onSuccess?: () => Promise<void> | void,
   ) {
-    // 异步处理用户登录操作并获取 accessToken
+    // 本地验证：检查用户名和密码是否填写
+    if (!params.username || !params.password) {
+      notification.error({
+        message: $t('authentication.loginFailed'),
+        description: $t('authentication.usernameTip') || '请输入用户名和密码',
+        duration: 3,
+      });
+      return {
+        userInfo: null,
+      };
+    }
+
     let userInfo: null | UserInfo = null;
     try {
       loginLoading.value = true;
-      const { accessToken } = await loginApi(params);
 
-      // 如果成功获取到 accessToken
-      if (accessToken) {
-        accessStore.setAccessToken(accessToken);
+      // 设置模拟的 accessToken
+      const mockAccessToken = 'mock-access-token-' + Date.now();
+      accessStore.setAccessToken(mockAccessToken);
 
-        // 获取用户信息并存储到 accessStore 中
-        const [fetchUserInfoResult, accessCodes] = await Promise.all([
-          fetchUserInfo(),
-          getAccessCodesApi(),
-        ]);
+      // 获取模拟的用户信息
+      userInfo = await fetchUserInfo();
 
-        userInfo = fetchUserInfoResult;
+      // 设置模拟的权限码（空数组，表示所有权限）
+      accessStore.setAccessCodes([]);
 
-        userStore.setUserInfo(userInfo);
-        accessStore.setAccessCodes(accessCodes);
+      if (accessStore.loginExpired) {
+        accessStore.setLoginExpired(false);
+      } else {
+        onSuccess
+          ? await onSuccess?.()
+          : await router.push(
+              userInfo.homePath || preferences.app.defaultHomePath,
+            );
+      }
 
-        if (accessStore.loginExpired) {
-          accessStore.setLoginExpired(false);
-        } else {
-          onSuccess
-            ? await onSuccess?.()
-            : await router.push(
-                userInfo.homePath || preferences.app.defaultHomePath,
-              );
-        }
-
-        if (userInfo?.realName) {
-          notification.success({
-            description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.realName}`,
-            duration: 3,
-            message: $t('authentication.loginSuccess'),
-          });
-        }
+      if (userInfo?.realName) {
+        notification.success({
+          description: `${$t('authentication.loginSuccessDesc')}:${userInfo?.realName}`,
+          duration: 3,
+          message: $t('authentication.loginSuccess'),
+        });
       }
     } finally {
       loginLoading.value = false;
@@ -78,11 +81,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function logout(redirect: boolean = true) {
-    try {
-      await logoutApi();
-    } catch {
-      // 不做任何处理
-    }
+    // 移除 API 调用，直接执行登出逻辑
     resetAllStores();
     accessStore.setLoginExpired(false);
 
@@ -98,8 +97,17 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function fetchUserInfo() {
-    let userInfo: null | UserInfo = null;
-    userInfo = await getUserInfoApi();
+    // 返回模拟的用户信息
+    const userInfo: UserInfo = {
+      avatar: preferences.app.defaultAvatar,
+      desc: '',
+      homePath: preferences.app.defaultHomePath,
+      realName: '用户',
+      roles: ['user'],
+      token: 'mock-token',
+      userId: '1',
+      username: 'user',
+    };
     userStore.setUserInfo(userInfo);
     return userInfo;
   }

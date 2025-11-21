@@ -7,9 +7,10 @@ import { computed, onMounted, ref } from 'vue';
 
 import { ProfileBaseSetting } from '@vben/common-ui';
 
-import { getUserInfoApi } from '#/api';
+import { useUserStore } from '@vben/stores';
 
 const profileBaseSettingRef = ref();
+const userStore = useUserStore();
 
 const MOCK_ROLES_OPTIONS: BasicOption[] = [
   {
@@ -55,9 +56,17 @@ const formSchema = computed((): VbenFormSchema[] => {
   ];
 });
 
-onMounted(async () => {
-  const data = await getUserInfoApi();
-  profileBaseSettingRef.value.getFormApi().setValues(data);
+onMounted(() => {
+  // 使用 store 中的用户信息，而不是调用 API
+  const userInfo = userStore.userInfo;
+  if (userInfo && profileBaseSettingRef.value) {
+    profileBaseSettingRef.value.getFormApi().setValues({
+      realName: userInfo.realName || '',
+      username: userInfo.username || '',
+      roles: userInfo.roles || [],
+      introduction: userInfo.introduction || '',
+    });
+  }
 });
 </script>
 <template>
