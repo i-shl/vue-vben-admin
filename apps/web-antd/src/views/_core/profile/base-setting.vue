@@ -6,7 +6,6 @@ import type { VbenFormSchema } from '#/adapter/form';
 import { computed, onMounted, ref } from 'vue';
 
 import { ProfileBaseSetting } from '@vben/common-ui';
-
 import { useUserStore } from '@vben/stores';
 
 const profileBaseSettingRef = ref();

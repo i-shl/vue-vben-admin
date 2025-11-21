@@ -22,7 +22,7 @@ async function getStagedFiles(): Promise<string[]> {
     changedList = changedList.map((item) => path.resolve(process.cwd(), item));
     const changedSet = new Set(changedList);
     changedSet.delete('');
-    return Array.from(changedSet);
+    return [...changedSet];
   } catch (error) {
     console.error('Failed to get staged files:', error);
     return [];
@@ -45,4 +45,4 @@ async function add(filePath: string, cwd?: string): Promise<void> {
   }
 }
 
-export { getStagedFiles, add };
+export { add, getStagedFiles };

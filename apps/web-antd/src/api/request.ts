@@ -50,7 +50,7 @@ function createRequestClient(baseURL: string, options?: RequestClientOptions) {
   async function doRefreshToken() {
     const accessStore = useAccessStore();
     // 生成新的模拟 token
-    const newToken = 'mock-access-token-' + Date.now();
+    const newToken = `mock-access-token-${Date.now()}`;
     accessStore.setAccessToken(newToken);
     return newToken;
   }

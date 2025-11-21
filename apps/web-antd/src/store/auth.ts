@@ -1,4 +1,4 @@
-﻿import type { Recordable, UserInfo } from '@vben/types';
+import type { Recordable, UserInfo } from '@vben/types';
 
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -45,7 +45,7 @@ export const useAuthStore = defineStore('auth', () => {
       loginLoading.value = true;
 
       // 设置模拟的 accessToken
-      const mockAccessToken = 'mock-access-token-' + Date.now();
+      const mockAccessToken = `mock-access-token-${Date.now()}`;
       accessStore.setAccessToken(mockAccessToken);
 
       // 获取模拟的用户信息
