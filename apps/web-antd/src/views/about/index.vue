@@ -4,6 +4,7 @@ defineOptions({ name: 'About' });
 
 <template>
   <div class="p-5">
-    <!-- 关于页面内容 -->
+    这是关于页面
   </div>
 </template>
+

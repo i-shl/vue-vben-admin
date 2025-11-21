@@ -4,6 +4,6 @@ defineOptions({ name: 'Workspace' });
 
 <template>
   <div class="p-5">
-    <!-- 工作台内容 -->
+    这是工作台页面
   </div>
 </template>

@@ -4,6 +4,6 @@ defineOptions({ name: 'Analytics' });
 
 <template>
   <div class="p-5">
-    <!-- 分析页内容 -->
+    这是分析页面
   </div>
 </template>
