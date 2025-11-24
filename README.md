@@ -5,7 +5,7 @@
 ## 项目说明
 
 > 本项目基于 [vue-vben-admin](https://github.com/vbenjs/vue-vben-admin) [v5.5.9](https://github.com/vbenjs/vue-vben-admin/releases/tag/v5.5.9) 版本进行定制开发。
-> 
+>
 > vue-vben-admin 是一个免费开源的中后台模板，采用最新的 Vue 3、Vite、TypeScript 等主流技术开发，开箱即用。
 
 - [vue-vben-admin 文档地址](https://doc.vben.pro/)
