@@ -7,7 +7,20 @@ import { defineOverridesPreferences } from '@vben/preferences';
  */
 export const overridesPreferences = defineOverridesPreferences({
   // overrides
+  widget: {
+    languageToggle: false,
+  },
   app: {
     name: import.meta.env.VITE_APP_TITLE,
+    locale: 'zh-CN',
+  },
+  copyright: {
+    companyName: '槟气',
+    companySiteLink: '',
+    date: '2023',
+    enable: true,
+    icp: '',
+    icpLink: '',
+    settingShow: true,
   },
 });
