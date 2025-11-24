@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { SUPPORT_LANGUAGES } from '@vben/constants';
 import { $t } from '@vben/locales';
+import { preferences } from '@vben/preferences';
 
 import InputItem from '../input-item.vue';
 import SelectItem from '../select-item.vue';
@@ -18,7 +19,11 @@ const appEnableCheckUpdates = defineModel<boolean>('appEnableCheckUpdates');
 </script>
 
 <template>
-  <SelectItem v-model="appLocale" :items="SUPPORT_LANGUAGES">
+  <SelectItem
+    v-if="preferences.widget.languageToggle"
+    v-model="appLocale"
+    :items="SUPPORT_LANGUAGES"
+  >
     {{ $t('preferences.language') }}
   </SelectItem>
   <SwitchItem v-model="appDynamicTitle">

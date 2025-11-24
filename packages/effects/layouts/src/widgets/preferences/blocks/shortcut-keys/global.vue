@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 
 import { $t } from '@vben/locales';
+import { preferences } from '@vben/preferences';
 import { isWindowsOs } from '@vben/utils';
 
 import SwitchItem from '../switch-item.vue';
@@ -43,7 +44,11 @@ const altView = computed(() => (isWindowsOs() ? 'Alt' : '⌥'));
     {{ $t('preferences.shortcutKeys.preferences') }}
     <template #shortcut> {{ altView }} , </template>
   </SwitchItem> -->
-  <SwitchItem v-model="shortcutKeysLockScreen" :disabled="!shortcutKeysEnable">
+  <SwitchItem
+    v-if="preferences.widget.lockScreen"
+    v-model="shortcutKeysLockScreen"
+    :disabled="!shortcutKeysEnable"
+  >
     {{ $t('ui.widgets.lockScreen.title') }}
     <template #shortcut> {{ altView }} L </template>
   </SwitchItem>

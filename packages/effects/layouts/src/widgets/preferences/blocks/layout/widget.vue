@@ -4,6 +4,7 @@ import type { SelectOption } from '@vben/types';
 import { computed } from 'vue';
 
 import { $t } from '@vben/locales';
+import { preferences } from '@vben/preferences';
 
 import SelectItem from '../select-item.vue';
 import SwitchItem from '../switch-item.vue';
@@ -47,7 +48,10 @@ const positionItems = computed((): SelectOption[] => [
   <SwitchItem v-model="widgetThemeToggle">
     {{ $t('preferences.widget.themeToggle') }}
   </SwitchItem>
-  <SwitchItem v-model="widgetLanguageToggle">
+  <SwitchItem
+    v-if="preferences.widget.languageToggle"
+    v-model="widgetLanguageToggle"
+  >
     {{ $t('preferences.widget.languageToggle') }}
   </SwitchItem>
   <SwitchItem v-model="widgetFullscreen">
@@ -56,7 +60,7 @@ const positionItems = computed((): SelectOption[] => [
   <SwitchItem v-model="widgetNotification">
     {{ $t('preferences.widget.notification') }}
   </SwitchItem>
-  <SwitchItem v-model="widgetLockScreen">
+  <SwitchItem v-if="preferences.widget.lockScreen" v-model="widgetLockScreen">
     {{ $t('preferences.widget.lockScreen') }}
   </SwitchItem>
   <SwitchItem v-model="widgetSidebarToggle">
