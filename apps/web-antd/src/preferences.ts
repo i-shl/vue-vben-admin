@@ -9,6 +9,9 @@ export const overridesPreferences = defineOverridesPreferences({
   // overrides
   widget: {
     languageToggle: false,
+    notification: false,
+    timezone: false,
+    lockScreen: false,
   },
   app: {
     name: import.meta.env.VITE_APP_TITLE,

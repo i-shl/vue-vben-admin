@@ -14,7 +14,7 @@ import { isWindowsOs } from '@vben/utils';
 
 import { useVbenModal } from '@vben-core/popup-ui';
 import {
-  Badge,
+  // Badge,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -192,35 +192,29 @@ if (enableShortcutKey.value) {
     <DropdownMenuTrigger ref="refTrigger" :disabled="props.trigger === 'hover'">
       <div class="hover:bg-accent ml-1 mr-2 cursor-pointer rounded-full p-1.5">
         <div class="hover:text-accent-foreground flex-center">
-          <VbenAvatar :alt="text" :src="avatar" class="size-8" dot />
+          <VbenAvatar :alt="text" :src="avatar" class="size-8" />
         </div>
       </div>
     </DropdownMenuTrigger>
     <DropdownMenuContent class="mr-2 min-w-[240px] p-0 pb-1">
       <div ref="refContent">
         <DropdownMenuLabel class="flex items-center p-3">
-          <VbenAvatar
-            :alt="text"
-            :src="avatar"
-            class="size-12"
-            dot
-            dot-class="bottom-0 right-1 border-2 size-4 bg-green-500"
-          />
+          <VbenAvatar :alt="text" :src="avatar" class="size-12" />
           <div class="ml-2 w-full">
             <div
-              v-if="tagText || text || $slots.tagText"
-              class="text-foreground mb-1 flex items-center text-sm font-medium"
+              v-if="text"
+              class="text-foreground flex items-center text-sm font-medium"
             >
               {{ text }}
-              <slot name="tagText">
+              <!-- <slot name="tagText">
                 <Badge v-if="tagText" class="ml-2 text-green-400">
                   {{ tagText }}
                 </Badge>
-              </slot>
+              </slot> -->
             </div>
-            <div class="text-muted-foreground text-xs font-normal">
+            <!-- <div class="text-muted-foreground text-xs font-normal">
               {{ description }}
-            </div>
+            </div> -->
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator v-if="menus?.length" />
