@@ -150,6 +150,11 @@ import './styles.css';
 </style>
 ```
 
+### defineOptions 强制使用
+- **所有组件必须使用 `defineOptions`**: 每个 Vue 组件都必须使用 `defineOptions({ name: 'ComponentName' })` 定义组件名
+- **组件名使用 PascalCase**: 组件名必须使用 PascalCase 格式
+- **位置**: `defineOptions` 必须在导入语句之后、`defineProps` 和 `defineEmits` 之前
+
 ### defineOptions, defineProps, defineEmits 顺序
 ```vue
 <script setup lang="ts">
@@ -250,6 +255,34 @@ defineOptions({ name: 'ComponentName' });
     按钮
   </VbenButton>
   ```
+
+### 模板根节点规范
+- **必须使用单个根节点**: 由于项目开启了路由切换动画，模板必须只有一个根节点，否则会导致页面切换后显示空白
+- **解决方案**: 在模板最外层添加一个 `<div></div>` 包裹所有内容
+- **注意**: template 下的根注释节点也算一个节点，需要避免在根节点同级使用注释
+
+错误示例：
+```vue
+<template>
+  <!-- 注释也算一个节点 -->
+  <h1>text h1</h1>
+  <h2>text h2</h2>
+</template>
+```
+
+正确示例：
+```vue
+<template>
+  <div>
+    <h1>text h1</h1>
+    <h2>text h2</h2>
+  </div>
+</template>
+```
+
+提示：
+- 如果想使用多个根标签，可以禁用路由切换动画
+- template 下面的根注释节点也算一个节点
 
 ---
 
@@ -427,19 +460,21 @@ defineOptions({ name: 'ComponentName' });
 - [ ] 对象/数组末尾有尾随逗号
 - [ ] TypeScript 类型使用 `import type` 导入
 - [ ] Vue 组件块顺序正确（script -> template -> style）
+- [ ] 所有组件都使用了 defineOptions 定义组件名
 - [ ] defineOptions 在 defineProps 之前
 - [ ] HTML 属性使用双引号
 - [ ] 组件名使用 PascalCase
 - [ ] Props 使用 camelCase
 - [ ] 事件名使用 kebab-case
 - [ ] Tailwind CSS 类已排序（使用 Prettier 插件）
-- [x] 没有 console.log（只允许 console.warn 和 console.error）
+- [ ] 没有 console.log（只允许 console.warn 和 console.error）
 - [ ] 代码行长度不超过 80 字符
 - [ ] 缩进为 2 个空格
 - [ ] 没有行尾空格
 - [ ] v-bind 使用 `:` 简写
 - [ ] v-on 使用 `@` 简写
 - [ ] 多行属性每个属性一行
+- [ ] template 只有一个根节点（避免页面切换空白问题）
 
 ---
 
