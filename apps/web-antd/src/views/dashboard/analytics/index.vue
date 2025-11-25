@@ -57,16 +57,20 @@ const handleLogin = async () => {
   <div class="p-5">
     <div class="mb-4">
       <div class="mb-2 font-semibold">请求数据：</div>
-      <pre class="rounded bg-gray-100 p-3">{{
+      <pre class="rounded bg-muted p-3 text-foreground">{{
         JSON.stringify(requestData, null, 2)
       }}</pre>
     </div>
     <div>
       <div class="mb-2 font-semibold">响应数据：</div>
-      <div v-if="responseData" class="rounded bg-gray-100 p-3">
-        <pre>{{ JSON.stringify(responseData, null, 2) }}</pre>
+      <div v-if="responseData" class="rounded bg-muted p-3">
+        <pre class="text-foreground">{{
+          JSON.stringify(responseData, null, 2)
+        }}</pre>
       </div>
-      <div v-else class="text-gray-400">暂无响应数据，请点击按钮调用接口</div>
+      <div v-else class="text-muted-foreground">
+        暂无响应数据，请点击按钮调用接口
+      </div>
     </div>
   </div>
 </template>
