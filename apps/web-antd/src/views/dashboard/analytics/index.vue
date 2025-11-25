@@ -48,6 +48,7 @@ const handleLogin = async () => {
 <template>
   <div>
     <div class="p-5">这是分析页面</div>
+    <img class="w-1/4" src="/static/test.jpg" alt="test" />
     <div class="p-5">打包后在dist目录执行http-server，接口正确</div>
     <div class="p-5">
       点击按钮调用登录接口的功能，默认显示请求数据，点击按钮后展现响应数据，响应数据需要显示在页面上。
