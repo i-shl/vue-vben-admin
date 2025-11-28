@@ -31,8 +31,15 @@
     "@vueuse/core": "catalog:",
     "ant-design-vue": "catalog:",
     "dayjs": "catalog:",
+    "file-saver": "^2.0.5",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.4",
     "pinia": "catalog:",
+    "pizzip": "^3.2.0",
+    "pptxgenjs": "^4.0.1",
+    "push.js": "^1.0.12",
     "vue": "catalog:",
-    "vue-router": "catalog:"
+    "vue-router": "catalog:",
+    "xlsx": "^0.18.5"
   }
 }
