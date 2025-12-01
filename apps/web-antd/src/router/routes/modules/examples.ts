@@ -47,6 +47,15 @@ const routes: RouteRecordRaw[] = [
           title: '桌面通知',
         },
       },
+      {
+        name: 'ExampleCityList',
+        path: 'city-list',
+        component: () => import('#/views/examples/city-list/index.vue'),
+        meta: {
+          icon: 'lucide:map-pin',
+          title: '城市列表接口',
+        },
+      },
     ],
   },
 ];
